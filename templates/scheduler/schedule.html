@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>スケジュール: {{ selected_date|date:"Y年m月d日" }}</h1>
+<!-- 日付選択フォーム -->
+<form method="post">
+    {% csrf_token %}
+    <input type="date" name="date" value="{{ selected_date|date:'Y-m-d' }}">
+    <input type="submit" value="日付選択">
+</form>
+
+<!-- スケジュール表示テーブル -->
+<table>
+    <thead>
+        <tr>
+            <th>時間</th>
+            <th>計画</th>
+            <th>振り返り</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for schedule in schedules %}
+        <tr>
+            <td>{{ schedule.hour }}:00</td>
+            <td>{{ schedule.plan|default:"" }}</td>
+            <td>{{ schedule.reflection|default:"" }}</td>
+            <td><a href="{% url 'edit_schedule' schedule.id %}">編集</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
