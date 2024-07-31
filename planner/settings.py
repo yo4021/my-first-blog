@@ -120,7 +120,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 DEBUG = False
-ALLOWED_HOSTS = ['yo2140.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', 'pythonanywhere.com' ,'yo2140.pythonanywhere.com']
 
 # 静的ファイルの設定
 STATIC_ROOT = '/home/yo2140/my-first-blog/static'
