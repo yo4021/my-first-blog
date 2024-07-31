@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-a0=!#aib8q@h#xs9@is^k+1ia^dnbmm7lun#m*2l%(i3tyzwdo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yo4021.pythonanywhere.com']
 
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -74,7 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'planner.wsgi.application'
 
-
+CSRF_TRUSTED_ORIGINS = ['https://yo4021.pythonanywhere.com']
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
