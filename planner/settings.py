@@ -74,7 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'planner.wsgi.application'
 
-CSRF_TRUSTED_ORIGINS = ['https://yo4021.pythonanywhere.com']
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
