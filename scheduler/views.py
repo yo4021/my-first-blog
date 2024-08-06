@@ -15,7 +15,7 @@ def login_view(request):
             login(request, user)
             return redirect('schedule')
         else:
-            return render(request, 'registration/login.html', {'error': 'Invalid credentials'})
+            return render(request, 'registration/login.html', {'error': 'ユーザー名またはパスワードが正しくありません。'})
     return render(request, 'registration/login.html')
 
 @login_required
