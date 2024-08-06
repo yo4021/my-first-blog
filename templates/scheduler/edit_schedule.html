@@ -1,10 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>スケジュール編集</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="保存">
-</form>
+<div class="edit-schedule-container">
+    <h2>{{ schedule.hour }}:00 のスケジュール編集</h2>
+    <form method="post" class="edit-schedule-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.plan.id_for_label }}">計画:</label>
+            {{ form.plan }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.reflection.id_for_label }}">振り返り:</label>
+            {{ form.reflection }}
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">保存</button>
+            <a href="{% url 'schedule' %}" class="btn btn-secondary">戻る</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

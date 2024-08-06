@@ -1,23 +1,33 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
 from .models import Schedule
 from .forms import ScheduleForm
-from datetime import datetime, time
+from datetime import datetime
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('schedule')
+        else:
+            return render(request, 'registration/login.html', {'error': 'Invalid credentials'})
+    return render(request, 'registration/login.html')
 
 @login_required
 def schedule_view(request):
-    # POSTリクエストの場合、選択された日付を取得
     if request.method == 'POST':
         date = request.POST.get('date')
         selected_date = datetime.strptime(date, '%Y-%m-%d').date()
     else:
-        # GETリクエストの場合、今日の日付を使用
         selected_date = datetime.now().date()
 
-    # 9時から18時までの各時間のスケジュールを取得または作成
     schedules = []
-    for hour in range(9, 19):
+    for hour in range(24):
         schedule, created = Schedule.objects.get_or_create(
             user=request.user,
             date=selected_date,
@@ -32,18 +42,23 @@ def schedule_view(request):
 
 @login_required
 def edit_schedule(request, schedule_id):
-    # 指定されたIDのスケジュールを取得
-    schedule = Schedule.objects.get(id=schedule_id)
+    schedule = get_object_or_404(Schedule, id=schedule_id, user=request.user)
     if request.method == 'POST':
-        # フォームにPOSTデータを設定
         form = ScheduleForm(request.POST, instance=schedule)
         if form.is_valid():
             form.save()
             return redirect('schedule')
     else:
-        # GET時は既存のスケジュールデータでフォームを初期化
         form = ScheduleForm(instance=schedule)
-    return render(request, 'scheduler/edit_schedule.html', {'form': form})
+    return render(request, 'scheduler/edit_schedule.html', {'form': form, 'schedule': schedule})
+
+@login_required
+def clear_schedule(request, schedule_id):
+    schedule = get_object_or_404(Schedule, id=schedule_id, user=request.user)
+    schedule.plan = ''
+    schedule.reflection = ''
+    schedule.save()
+    return redirect('schedule')
 
 def register(request):
     if request.method == 'POST':

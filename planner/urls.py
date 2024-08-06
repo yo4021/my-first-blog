@@ -13,16 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from django.contrib.auth import views as auth_views
 from scheduler import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('scheduler.urls')),
-    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
-    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('', views.login_view, name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('register/', views.register, name='register'),
+    path('schedule/', views.schedule_view, name='schedule'),
+    path('edit/<int:schedule_id>/', views.edit_schedule, name='edit_schedule'),
+    path('clear/<int:schedule_id>/', views.clear_schedule, name='clear_schedule'),
 ]

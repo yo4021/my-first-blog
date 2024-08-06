@@ -25,11 +25,8 @@ SECRET_KEY = 'django-insecure-a0=!#aib8q@h#xs9@is^k+1ia^dnbmm7lun#m*2l%(i3tyzwdo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
 ALLOWED_HOSTS = []
-LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/accounts/login/'
+
 
 # Application definition
 
@@ -51,7 +48,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'scheduler.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'planner.urls'
@@ -119,11 +115,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-DEBUG = False
-ALLOWED_HOSTS = ['localhost', 'pythonanywhere.com' ,'yo2140.pythonanywhere.com']
 
-# 静的ファイルの設定
-STATIC_ROOT = '/home/yo2140/my-first-blog/static'
 STATIC_URL = '/static/'
 
 # Default primary key field type
