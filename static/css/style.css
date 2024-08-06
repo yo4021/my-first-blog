@@ -18,7 +18,7 @@ body {
 
 /* ヘッダーのスタイル */
 header {
-    background-color: #333;
+    background-color: #fff;
     color: #fff;
     padding: 1rem 0;
 }
@@ -77,6 +77,7 @@ input[type="date"], input[type="submit"] {
     text-decoration: none;
     transition: background-color 0.3s;
     color: black;
+    background-color: #4CAF50;
 }
 
 /* 編集ボタン */
@@ -231,4 +232,33 @@ input[type="date"], input[type="submit"] {
     .btn-secondary {
         margin-left: 0;
     }
+}
+
+/* ログインと登録フォームのスタイル */
+.auth-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.auth-form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* ヘッダーのスタイル変更 */
+header {
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 1rem 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
 }

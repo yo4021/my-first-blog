@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>新規登録</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn">登録</button>
-</form>
-<p>既にアカウントをお持ちの方は <a href="{% url 'login' %}">こちら</a> からログインしてください。</p>
+<div class="auth-form-container">
+    <div class="auth-form">
+        <h2>新規登録</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">登録</button>
+        </form>
+        <p>既にアカウントをお持ちの方は <a href="{% url 'login' %}">こちら</a> からログインしてください。</p>
+    </div>
+</div>
 {% endblock %}

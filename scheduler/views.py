@@ -24,7 +24,11 @@ def schedule_view(request):
         date = request.POST.get('date')
         selected_date = datetime.strptime(date, '%Y-%m-%d').date()
     else:
-        selected_date = datetime.now().date()
+        selected_date = request.GET.get('date')
+        if selected_date:
+            selected_date = datetime.strptime(selected_date, '%Y-%m-%d').date()
+        else:
+            selected_date = datetime.now().date()
 
     schedules = []
     for hour in range(24):
@@ -47,7 +51,7 @@ def edit_schedule(request, schedule_id):
         form = ScheduleForm(request.POST, instance=schedule)
         if form.is_valid():
             form.save()
-            return redirect('schedule')
+            return redirect(f'/schedule/?date={schedule.date}')
     else:
         form = ScheduleForm(instance=schedule)
     return render(request, 'scheduler/edit_schedule.html', {'form': form, 'schedule': schedule})
@@ -58,8 +62,7 @@ def clear_schedule(request, schedule_id):
     schedule.plan = ''
     schedule.reflection = ''
     schedule.save()
-    return redirect('schedule')
-
+    return redirect(f'/schedule/?date={schedule.date}')
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
