@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>スケジュール: {{ selected_date|date:"Y年m月d日" }}</h2>
+<div class="header-actions">
+    <h2>スケジュール: {{ selected_date|date:"Y年m月d日" }}</h2>
+    <a href="{% url 'logout' %}" class="btn btn-logout">ログアウト</a>
+</div>
 <form method="post">
     {% csrf_token %}
     <input type="date" name="date" value="{{ selected_date|date:'Y-m-d' }}">
     <input type="submit" value="日付選択" class="btn">
 </form>
+
+
 
 <table>
     <thead>

@@ -177,3 +177,21 @@ input[type="date"], input[type="submit"], input[type="text"], input[type="passwo
         align-items: stretch;
     }
 }
+
+/* ヘッダーアクション */
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* ログアウトボタン */
+.btn-logout {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
+}
